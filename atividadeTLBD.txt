@@ -1,0 +1,97 @@
+use master
+drop database atividade07082018
+create database atividade07082018
+use atividade07082018
+
+
+create table metodologia (
+id int primary key identity (1,1),
+titulo varchar(100)
+)
+create table tarefa (
+id int primary key identity (1,1),
+titulo varchar(100) not null,
+prazo_estimado date,
+descricao varchar(250),
+data_inicio date not null,
+data_termino date,
+id_metodologia int,
+
+foreign key (id_metodologia) references metodologia (id)
+)
+
+create table pessoas (
+id int primary key identity (1,1),
+nome varchar(100),
+email varchar(100),
+sexo varchar(20)
+)
+
+
+create table rel_tarefa_pessoa (
+id int primary key identity (1,1),
+id_tarefa int,
+id_pessoas int
+
+
+foreign key (id_pessoas) references pessoas (id),
+foreign key (id_tarefa) references tarefa (id)
+
+)
+
+
+insert into metodologia values('Comodoro')
+insert into metodologia values('Design Thinkings')
+insert into metodologia values('Scrum')
+
+insert into pessoas (nome, email, sexo) values('Vitor','vitor@gmail.com','masculino')
+insert into pessoas (nome, email, sexo) values('Carolina Campos','carol@gmail.com','feminino')
+insert into pessoas (nome, email, sexo) values('Ronald','ronald@gmail.com','masculino')
+insert into pessoas (nome, email, sexo) values('Humberto','humberto@gmail.com','masculino')
+insert into pessoas (nome, email, sexo) values('Vinicius','vinicius@gmail.com','masculino')
+
+
+
+insert into tarefa (titulo,prazo_estimado, descricao,data_inicio,data_termino,id_metodologia ) values ('Tarefa 1','2018-08-25','Manutenção de Computadores','2018-08-08','2018-08-30',1)
+insert into tarefa (titulo,prazo_estimado, descricao,data_inicio,data_termino, id_metodologia) values('Tarefa 2','2018-08-10','Limpar Escritório','2018-08-08','2018-08-10', 2)
+insert into tarefa (titulo,prazo_estimado, descricao,data_inicio,data_termino, id_metodologia) values('Tarefa 3','2018-08-30','Tela de cadastro de Cliente','2018-08-08','2018-08-20', 2)
+insert into tarefa  (titulo,prazo_estimado, descricao,data_inicio,data_termino, id_metodologia)values('Tarefa 4','2018-08-30','Banco de dados do cadastro','2018-08-08','2018-08-20', 3)
+
+insert into rel_tarefa_pessoa (id_tarefa, id_pessoas) values (1,1)
+insert into rel_tarefa_pessoa (id_tarefa, id_pessoas) values (1,2)
+insert into rel_tarefa_pessoa (id_tarefa, id_pessoas) values (2,2)
+insert into rel_tarefa_pessoa (id_tarefa, id_pessoas) values (3,3)
+insert into rel_tarefa_pessoa (id_tarefa, id_pessoas) values (4,3)
+insert into rel_tarefa_pessoa (id_tarefa, id_pessoas) values (3,4)
+insert into rel_tarefa_pessoa (id_tarefa, id_pessoas) values (4,4)
+
+
+--select * from metodologia
+
+--1
+
+/*select a.nome, b.id_pessoas
+from pessoas as a 
+left join rel_tarefa_pessoa as b
+on a.id = b.id_pessoas where b.id_tarefa is null*/
+
+--2
+
+
+
+--3
+/*SELECT COUNT (*) as 'Homens realizaram a tarefa'
+from pessoas as a 
+left join rel_tarefa_pessoa as b
+on a.id = b.id_pessoas where b.id_tarefa is not null and a.sexo = 'masculino' 
+
+SELECT COUNT (*) as 'Mulheres realizaram a tarefa'
+from pessoas as a 
+left join rel_tarefa_pessoa as b
+on a.id = b.id_pessoas where b.id_tarefa is not null and a.sexo = 'feminino' 
+*/
+
+
+--4
+
+
