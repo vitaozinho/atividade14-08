@@ -63,25 +63,26 @@ insert into rel_tarefa_pessoa (id_tarefa, id_pessoas) values (2,2)
 insert into rel_tarefa_pessoa (id_tarefa, id_pessoas) values (3,3)
 insert into rel_tarefa_pessoa (id_tarefa, id_pessoas) values (4,3)
 insert into rel_tarefa_pessoa (id_tarefa, id_pessoas) values (3,4)
-insert into rel_tarefa_pessoa (id_tarefa, id_pessoas) values (4,4)
+
 
 
 --select * from metodologia
 
 --1
 
-/*select a.nome, b.id_pessoas
+/*select a.nome, b.id_pessoas as 'Pessoas que não fizeram nada'
 from pessoas as a 
 left join rel_tarefa_pessoa as b
 on a.id = b.id_pessoas where b.id_tarefa is null*/
 
 --2
 
-SELECT m.titulo as 'Metodologias mais utilizadas'
-FROM metodologia as m
-inner join tarefa as t
-on m.id = t.idMetodologia
-group by m.titulo order by COUNT(*) desc
+SELECT COUNT(*)as Vezes,
+a.titulo as 'Metodologias mais utilizadas'
+FROM metodologia as a
+inner join tarefa as b
+on a.id = b.id_metodologia
+group by a.titulo
 
 
 
