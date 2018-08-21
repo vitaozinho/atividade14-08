@@ -45,7 +45,7 @@ insert into metodologia values('Design Thinkings')
 insert into metodologia values('Scrum')
 
 insert into pessoas (nome, email, sexo) values('Vitor','vitor@gmail.com','masculino')
-insert into pessoas (nome, email, sexo) values('Carolina Campos','carol@gmail.com','feminino')
+insert into pessoas (nome, email, sexo) values('Carol Ramos','carol@gmail.com','feminino')
 insert into pessoas (nome, email, sexo) values('Ronald','ronald@gmail.com','masculino')
 insert into pessoas (nome, email, sexo) values('Humberto','humberto@gmail.com','masculino')
 insert into pessoas (nome, email, sexo) values('Vinicius','vinicius@gmail.com','masculino')
@@ -77,6 +77,12 @@ on a.id = b.id_pessoas where b.id_tarefa is null*/
 
 --2
 
+SELECT m.titulo as 'Metodologias mais utilizadas'
+FROM metodologia as m
+inner join tarefa as t
+on m.id = t.idMetodologia
+group by m.titulo order by COUNT(*) desc
+
 
 
 --3
@@ -93,5 +99,13 @@ on a.id = b.id_pessoas where b.id_tarefa is not null and a.sexo = 'feminino'
 
 
 --4
+SELECT a.nome as 'Atrasados'
+FROM pessoas as A
+Left Join rel_tarefa_pessoa as B 
+on a.id = B.id_pessoas
+join tarefa as c 
+on c.id = b.id_pessoas
+where c.data_termino > c.prazo_estimado
+
 
 
